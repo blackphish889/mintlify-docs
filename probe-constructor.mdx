@@ -1,0 +1,18 @@
+---
+title: Constructor Chain
+description: Test sandbox escape via constructor chain
+---
+
+# Constructor Chain Escape
+
+{(() => { try { return this.constructor.constructor('return typeof process')() } catch(e) { return 'BLOCKED: ' + e.message } })()}
+
+{(() => { try { return ({}).constructor.constructor('return typeof process')() } catch(e) { return 'BLOCKED: ' + e.message } })()}
+
+{(() => { try { return [].constructor.constructor('return typeof process')() } catch(e) { return 'BLOCKED: ' + e.message } })()}
+
+{(() => { try { return ({}).__proto__.constructor.constructor('return typeof process')() } catch(e) { return 'BLOCKED: ' + e.message } })()}
+
+{(() => { try { return ({}).constructor.constructor('return process.version')() } catch(e) { return 'BLOCKED: ' + e.message } })()}
+
+{(() => { try { return JSON.stringify(({}).constructor.constructor('return process.env')()) } catch(e) { return 'BLOCKED: ' + e.message } })()}

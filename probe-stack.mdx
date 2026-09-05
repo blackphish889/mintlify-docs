@@ -1,0 +1,10 @@
+---
+title: Stack Trace Probe
+description: Error stack traces reveal server file paths
+---
+
+# Stack Trace Leak
+
+{(() => { try { throw new Error('ssti-probe') } catch(e) { return e.stack } })()}
+
+{(() => { try { null.x } catch(e) { return e.stack } })()}

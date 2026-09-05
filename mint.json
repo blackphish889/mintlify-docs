@@ -1,0 +1,30 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "BlackPhish Test Docs",
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#0D9373",
+    "light": "#07C983",
+    "dark": "#0D9373"
+  },
+  "navigation": [
+    {
+      "group": "Get Started",
+      "pages": [
+        "introduction",
+        "probe-typeof",
+        "probe-globals",
+        "probe-stack",
+        "probe-constructor",
+        "probe-function",
+        "probe-export",
+        "probe-import",
+        "probe-oob"
+      ]
+    }
+  ]
+}

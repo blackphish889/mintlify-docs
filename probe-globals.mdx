@@ -1,0 +1,12 @@
+---
+title: Globals Probe
+description: Enumerate available globals in render context
+---
+
+# Global Enumeration
+
+{JSON.stringify(Object.getOwnPropertyNames(globalThis).sort().slice(0, 30))}
+
+{JSON.stringify(Object.getOwnPropertyNames(globalThis).sort().slice(30, 60))}
+
+{(globalThis).constructor.name}

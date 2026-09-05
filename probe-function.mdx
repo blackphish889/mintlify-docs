@@ -1,0 +1,16 @@
+---
+title: Function Constructor
+description: Test sandbox escape via Function constructor
+---
+
+# Function Constructor Escape
+
+{(() => { try { return new Function('return typeof process')() } catch(e) { return 'BLOCKED: ' + e.message } })()}
+
+{(() => { try { return new Function('return typeof require')() } catch(e) { return 'BLOCKED: ' + e.message } })()}
+
+{(() => { try { return Function('return typeof process')() } catch(e) { return 'BLOCKED: ' + e.message } })()}
+
+{(() => { try { return Reflect.apply(Function, null, ['return typeof process'])() } catch(e) { return 'BLOCKED: ' + e.message } })()}
+
+{(() => { try { return eval('typeof process') } catch(e) { return 'BLOCKED: ' + e.message } })()}

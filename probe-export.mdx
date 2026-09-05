@@ -1,0 +1,32 @@
+---
+title: Export Probe
+description: Test compile-time execution via export statements
+---
+
+export const probe1 = (() => {
+  try { return typeof process } catch(e) { return 'blocked' }
+})()
+
+export const probe2 = (() => {
+  try { return typeof require } catch(e) { return 'blocked' }
+})()
+
+export const probe3 = (() => {
+  try { return Object.getOwnPropertyNames(globalThis).slice(0,10).join(',') } catch(e) { return 'blocked: ' + e.message }
+})()
+
+export const probe4 = (() => {
+  try { return new Error('compile-time').stack } catch(e) { return 'blocked' }
+})()
+
+# Compile-Time Probe
+
+Exports execute during MDX compilation (serialize step), not render time.
+
+**typeof process:** {probe1}
+
+**typeof require:** {probe2}
+
+**globals:** {probe3}
+
+**stack:** {probe4}
